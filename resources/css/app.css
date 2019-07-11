@@ -6,3 +6,7 @@
   max-width: 100px;
   height: auto;
 }
+
+.hoverable:hover {
+  background-color: rgba(0,0,0,.075);
+}

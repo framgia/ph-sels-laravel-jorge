@@ -14,6 +14,8 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::where("isAdmin", "==", 0)->paginate(12);
+        return view('user.index', compact('users'));
     }
 
     /**
