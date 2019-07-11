@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="row container align-items-center">
                         <div class="col-md-auto">
-                            <img src="{{ asset('images/user-profile.png') }}" alt="default-user-profile" class="img-thumbnail-s">
+                            <img src="{{ asset('images/user-profile.png') }}" alt="default-user-profile" class="img-thumbnail-sm">
                         </div>
                         <div class="col-md-auto">
                             <p>
