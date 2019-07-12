@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Auth;
+use Hash;
+use Illuminate\Validation\Rule;
+use Validator;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +71,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if($id != Auth::user()->id) {
+            return abort(403);
+        }
+        $user = Auth::user();
+        return view('user.edit',compact('user'));
     }
 
     /**
@@ -72,9 +85,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user, $id)
+    public function update(User $user)
     {
-        //
+        request()->validate([
+            'name' => 'required | string | max:255',
+            'email'=> 'required | email | max:255|'. Rule::unique('users')->ignore($user->id),
+            'oldPassword' => 'nullable | Required_with:newPassword',
+            'newPassword'=> 'nullable | min:8 | confirmed'
+        ]);
+
+        $user->name = request('name');
+
+        $user->email = request('email');
+        
+
+        if (Hash::check(request('oldPassword'), $user->password)) {
+            $user->password = Hash::make(request('newPassword'));
+        }
+
+        $user->update();
+        Log::alert('Update Success');
+        return redirect()->back();
     }
 
     /**
