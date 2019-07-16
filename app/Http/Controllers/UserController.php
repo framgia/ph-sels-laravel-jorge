@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Auth;
 use Hash;
-use Illuminate\Validation\Rule;
+use App\User;
 use Validator;
+use App\Follows;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -89,7 +91,7 @@ class UserController extends Controller
     {
         request()->validate([
             'name' => 'required | string | max:255',
-            'email'=> 'required | email | max:255|'. Rule::unique('users')->ignore($user->id),
+            'email'=> 'required | email | max:255 | unique:users,email,'.$user->id,  //. Rule::unique('users')->ignore($user->id),
             'oldPassword' => 'nullable | Required_with:newPassword',
             'newPassword'=> 'nullable | min:8 | confirmed'
         ]);
@@ -117,5 +119,24 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function follow($id)
+    {
+        $follow = new Follows;
+        $follow->owner_id = Auth::user()->id;
+        $follow->user_id = $id;
+
+        $follow->save();
+        return redirect()->back();
+    }
+
+    public function unfollow($id)
+    {
+        $owner = Auth::user();
+        $follow = $owner->following->where('user_id', $id)->first();
+
+        $follow->delete();
+        return redirect()->back();
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Follows;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class User extends Authenticatable
 {
@@ -36,4 +38,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function following()
+    {
+        return $this->hasMany(Follows::Class, 'owner_id');
+    }
+
+    public function follower()
+    {
+        return $this->hasMany(Follows::Class, 'user_id');
+    }
+
+    public function is_following($id) {
+        $follow = $this->hasMany(Follows::Class, 'owner_id')->where('user_id', $id)->count();
+        return ($follow == 0)? false : true;
+    }
 }

@@ -18,5 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('user', 'UserController');
+Route::post('/user/follow/{id}', 'UserController@follow');
+Route::delete('/user/unfollow/{id}', 'UserController@unfollow');
 
 Route::get('/home', 'HomeController@index')->name('home');

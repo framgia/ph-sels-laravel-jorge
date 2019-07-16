@@ -12,8 +12,8 @@
             <div class="card hoverable">
                 <img src="{{ asset('images/user-profile.png') }}" alt="default-user-profile" class="card-img-top">
                 <div class="card-body">
-                <h5 class="card-title">{{ $user->name }}</h5>  
-                  <a href="" class="btn btn-block btn-primary">Follow</a>
+                <h5 class="card-title text-dark">{{ $user->name }}</h5>
+                  <a id="btn-toggle-follow"  is-following="{{ (Auth::user()->is_following($user->id))? 1 : 0 }}" class="btn btn-block btn-primary text-light" user-id="{{ $user->id }}">{{ (Auth::user()->is_following($user->id))? 'Unfollow' : 'Follow' }}</a>
                 </div>
             </div>
           </div>

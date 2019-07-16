@@ -17,7 +17,7 @@
                               <div class="col-md-6"><a href="">20<br>Followers</a></div>
                               <div class="col-md-6"><a href="">5<br>Following</a></div>
                               <div class="mt-3 col-12 justify-content-center">
-                                <button class="btn btn-block btn-primary">Follow</button>
+                                    <button id="btn-toggle-follow"  is-following="{{ (Auth::user()->is_following($user->id))? 1 : 0 }}" class="btn btn-block btn-primary" user-id="{{ $user->id }}">{{ (Auth::user()->is_following($user->id))? 'Unfollow' : 'Follow' }}</button>
                               </div>
                               <div class="mt-3 col-12 justify-content-center">
                                 <a href="">Learned 20 words</a>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="card">
+            <div class="card"> 
                 <div class="card-header">Activities</div>
 
                 <div class="card-body">
