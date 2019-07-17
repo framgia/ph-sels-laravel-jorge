@@ -6,3 +6,13 @@
   max-width: 100px;
   height: auto;
 }
+
+.text-progress-md {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.word-lg {
+  font-size: 6rem;
+  font-weight: 500;
+}
