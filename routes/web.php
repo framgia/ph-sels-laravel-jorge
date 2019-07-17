@@ -17,6 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/course/{course}/lesson/{lesson}', function ($courseId, $lessonId) {
+    return view('lesson.index');
+});
+Route::get('/course/{course}/result/{result}', function ($courseId, $resultId) {
+    return view('lesson.result');
+});
+
 Route::resource('user', 'UserController');
+Route::resource('course', 'CourseController');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
