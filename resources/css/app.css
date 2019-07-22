@@ -6,3 +6,19 @@
   max-width: 100px;
   height: auto;
 }
+
+.text-progress-md {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.word-lg {
+  font-size: 6rem;
+  font-weight: 500;
+}
+
+
+/* Hide all questions except the first */
+#course-lessons #lesson:not(:first-of-type) {
+  display: none;
+}
