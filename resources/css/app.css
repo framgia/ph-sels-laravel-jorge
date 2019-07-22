@@ -16,3 +16,9 @@
   font-size: 6rem;
   font-weight: 500;
 }
+
+
+/* Hide all questions except the first */
+#course-lessons #lesson:not(:first-of-type) {
+  display: none;
+}

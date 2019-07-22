@@ -12,6 +12,12 @@
               <div class="card-body">
                 <h5 class="card-title font-weight-bold">{{ $course->title }}</h5>
                 <p class="card-text font-weight-light">{{ $course->description }}</p>
+                @if($course->is_taken())
+                  <a class="btn btn-secondary d-flex float-right disabled"> Completed </a>
+                @else
+                  <a href="/user/start-course/{{ $course->id }}" class="btn btn-primary d-flex float-right"> Start </a>
+                @endif
+                
               </div>
           </div>
         </div>

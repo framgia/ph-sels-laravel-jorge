@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row mt-3">
       <div class="col-md-8">
-        <h2>Basic 500</h2>
+        <h2>{{ $course->title }}</h2>
       </div>
       <div class="col-md-4 text-right text-progress-md">
-        <span class="font-weight-bold">Result:</span> 1 of 20
+      <span class="font-weight-bold">Result:</span> {{ $result->score }} of {{ $result->totalScore }}
       </div>
     </div>
     
@@ -20,16 +20,13 @@
           </tr>
         </thead>
         <tbody class="h4">
+          @for($i=0; $i<count($answers); $i++)
           <tr>
-            <td>O</td>
-            <td>人</td>
-            <td>Person</td>
+            <td>{{ ($answers[$i]->isCorrect)? 'O' : 'X' }}</td>
+            <td>{{ $answers[$i]->lesson->word }}</td>
+            <td>{{ $answers[$i]->choice->name }}</td>
           </tr>
-          <tr>
-            <td>X</td>
-            <td>人</td>
-            <td>Person</td>
-          </tr>
+          @endfor
         </tbody>
     </table>
 </div>
